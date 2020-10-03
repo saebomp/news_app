@@ -10,6 +10,7 @@ import {
   Title,
   Tab
 } from 'native-base'
+import TabContentContainer from '../container/TabContentContainer';
 
 const TabScreen = () => {
   const sources = ['BBC', 'Bloomberg', 'TechCrunch'];
@@ -34,6 +35,7 @@ const TabScreen = () => {
             textStyle={styles.tabText}
             activeTextStyle={styles.tabText}
             >
+              <TabContentContainer />
             </Tab>
           ))}
         </Tabs>
