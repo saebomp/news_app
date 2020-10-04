@@ -15,8 +15,8 @@ const Time = props => {
 
 const styles = StyleSheet.create({
     time: {
-        marginHorizontal:10
+      marginHorizontal: 10
     }
-})
-
-export default Time
+  })
+  
+  export default Time

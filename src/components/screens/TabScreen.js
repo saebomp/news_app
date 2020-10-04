@@ -13,32 +13,35 @@ import {
 import TabContentContainer from '../container/TabContentContainer';
 
 const TabScreen = () => {
-  const sources = ['BBC', 'Bloomberg', 'TechCrunch'];
+  const sources = [
+    { name: 'BBC', id: 'bbc-news' },
+    { name: 'Bloomberg', id: 'bloomberg' },
+    { name: 'TechCrunch', id: 'techcrunch' }
+  ]
 
   return (
     <Container>
-        <Header style={styles.header} hasTabs>
-            <Left />
-            <Body>
-                <Title style={styles.title}>News App</Title>
-            </Body>
-            <Right></Right>
-        </Header>
-        <Tabs tabBarUnderlineStyle={styles.tabs}>
-          {/* 위에 선언한 sources 의 array를 map으로 돌려서 각 내용은 source로, 순서는 index 로 가져온다 */}
-          {sources.map((source, index) => (
-            <Tab 
+      <Header style={styles.header} hasTabs>
+        <Left />
+        <Body>
+          <Title style={styles.title}>News App</Title>
+        </Body>
+        <Right />
+      </Header>
+      <Tabs tabBarUnderlineStyle={styles.tabs}>
+        {sources.map((source, index) => (
+          <Tab
             key={index}
-            heading={source}
-            tabStyle={styles.activeTabStyle}
+            heading={source.name}
+            tabStyle={styles.tabStyle}
             activeTabStyle={styles.activeTabStyle}
             textStyle={styles.tabText}
             activeTextStyle={styles.tabText}
-            >
-              <TabContentContainer />
-            </Tab>
-          ))}
-        </Tabs>
+          >
+            <TabContentContainer source={source.id} />
+          </Tab>
+        ))}
+      </Tabs>
     </Container>
   )
 }
