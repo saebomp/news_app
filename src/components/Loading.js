@@ -1,7 +1,7 @@
 import React from 'react'
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native'
 
-const Loading = (props) => (
+const Loading = props => (
     <View style={{...styles.ActivityIndicator, ...props.style}}>
         <ActivityIndicator animating={props.isLoading} color='#000000' />
         <Text style={styles.loadingText} children='Loading...' />
@@ -17,3 +17,5 @@ const styles = StyleSheet.create({
         marginTop:10
     }
 })
+
+export default Loading

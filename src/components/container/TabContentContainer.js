@@ -1,8 +1,7 @@
-import React, {Component} from 'react'
-import {View,Text, Alert} from 'react-native'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
-import { getArticles } from '../../../service/api'
+import React, { Component } from 'react'
+import { Alert, Share } from 'react-native'
 
+import { getArticles } from '../../service/api'
 import TabContent from '../Tabs/TabContent'
 
 
@@ -20,13 +19,13 @@ componentDidMount() {
 
 //API Call function
 
-fetchNews = async (source) => {
-    console.log('fetch news')
-    getArticles(source).then(article => {
+fetchNews = async source => {
+    getArticles(source).then(
+        articles => {
         console.log('articles', articles)
         this.setState({
-            articles:articles,
-            isLoading:false
+            articles: articles,
+            isLoading: false
         })
     }, error => {
         Alert.alert('Error', `Something went wrong ${error}`)
@@ -34,8 +33,13 @@ fetchNews = async (source) => {
 }
 
 render() {
-    // return <TabContent />
-    return <Text>hello world</Text>
+    const {articles, isLoading } = this.state
+    return (
+        <TabContent 
+        articles={articles}
+        isLoading={isLoading}
+        />
+    )
 }
 }
 
