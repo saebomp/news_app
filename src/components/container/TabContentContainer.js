@@ -7,8 +7,10 @@ import TabContent from '../Tabs/TabContent'
 
 class TabContentContainer extends Component {
 state = {
+    articleData: {},
     article: [],
     isLoading: true,
+    modalVisible:false,
     source: this.props.source || 'bbc-news'
 }
 
@@ -32,15 +34,57 @@ fetchNews = async source => {
     })
 }
 
+//Handler Function
+
+//webView 보여지는부분
+handleArticlePress = ({title, url }) => {
+    // console.log(`Article with title ${title} pressed`)
+    this.setState({
+        modalVisible:true,
+        articleData: {
+            title,
+            url
+        }
+    })
+}
+//webView 모달창 닫는 버튼에 대한 펑션
+handleArticleModalClose = () => {
+    this.setState({
+        modalVisible:false,
+        articleData:{}
+    })
+}
+
+//webView에 있는 share 버튼
+handleArticleShare = (title, url) => {
+    const message = `${title}\n\nRead More @${url}\n\n Shared via ReactNative News App`
+    return Share.share(
+    {
+        title,
+        message,
+        url:message
+    },
+    {
+        dialogTitle:`Share ${title}`
+    }
+    )
+}
+
 render() {
-    const {articles, isLoading } = this.state
+    const { articleData, articles, isLoading, modalVisible } = this.state
     return (
         <TabContent 
         articles={articles}
+        articleData={articleData}
         isLoading={isLoading}
+        onArticlePress={this.handleArticlePress}
+        onArticleModalClose={this.handleArticleModalClose}
+        onArticleShare={this.handleArticleShare}
+        modalVisible={modalVisible}
         />
+        
     )
-}
+    }
 }
 
 export default TabContentContainer

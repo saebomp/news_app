@@ -5,7 +5,7 @@ import {StyleSheet} from 'react-native'
 import Time from './Time'
 
 const Article = props => {
-    const {article} = props;
+    const {article, onPress} = props;
     const {description, publishedAt, title, url, urlToImage} = article;
     return (
         <ListItem thumbnail key={title}>
@@ -23,9 +23,14 @@ const Article = props => {
                     <Time time={publishedAt} />
                 </View>
             </Body>
-            {/* <Right>
-
-            </Right> */}
+            <Right>
+                <Button 
+                    transparent
+                    onPress={() => onPress({title, url})}
+                >
+                    <Text>View</Text>
+                </Button>
+            </Right>
         </ListItem>
     )
 }

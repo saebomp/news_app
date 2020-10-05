@@ -5,8 +5,11 @@ import { StyleSheet} from 'react-native'
 import Article from '../Article'
 import Loading from '../Loading'
 
+import ArticleModal from '../modals/ArticleModal'
+
+
 const TabContent = (props) => {
-    const { articles, isLoading} = props;
+    const { articleData, articles, isLoading, modalVisible, onArticlePress, onArticleModalClose, onArticleShare } = props;
     // dataArray 쓰는법:  https://docs.nativebase.io/Components.html#accordion-def-headref
     // dataArray 는 data로 가져올 array 를 지정해줌. 여기서는 article 을 가져옴
     // <Article> 내용을 row 로 뿌려줌
@@ -19,22 +22,31 @@ const TabContent = (props) => {
     }
     const renderArticles = () => (
         <List 
-            dataArray={articles}
-            renderRow={article => {
-                return (
-                    <Article 
-                        article={article}
-                    />
-                )
-            }}
-            >
-        </List>
+        dataArray={articles}
+        renderRow={article => {
+            return (
+                <Article 
+                article={article}
+                onPress={onArticlePress}
+                />
+            )
+        }}
+        keyExtractor={(article, index) => index.toString()}
+        />
     )
-
-
-    return (
-        <Container>{renderArticles()}</Container>
-    )
+    const renderContent = () => 
+        isLoading ? renderLoadingState() : renderArticles()
+        return (
+            <Container>
+                {renderContent()}
+                <ArticleModal
+                    articleData={articleData}
+                    onClose={onArticleModalClose}
+                    onShare={onArticleShare}
+                    showModal={modalVisible}
+                />
+            </Container>
+        )
 }
 
 const styles = StyleSheet.create({
