@@ -14,12 +14,18 @@ const TabContent = (props) => {
     // dataArray 는 data로 가져올 array 를 지정해줌. 여기서는 article 을 가져옴
     // <Article> 내용을 row 로 뿌려줌
 
+
+
+
+    // loading 화면
     const renderLoadingState = () => {
         <Loading 
             isLoading={isLoading}
             style={styles.loadingState}
         />
     }
+
+    //Article (기사) 불러옴
     const renderArticles = () => (
         <List 
         dataArray={articles}
@@ -34,6 +40,8 @@ const TabContent = (props) => {
         keyExtractor={(article, index) => index.toString()}
         />
     )
+
+    //isLoadig true이면 loading화면 보여주고 아니면 article 가져와라
     const renderContent = () => 
         isLoading ? renderLoadingState() : renderArticles()
         return (

@@ -18,6 +18,10 @@ componentDidMount() {
     const {source} = this.state
     this.fetchNews(source)
 }
+// componentDidMount :렌더가 성공적으로 실행되었다면, ComponentDidMount가 실행된다. 그리고 나서 setState 등이 실행되어도 다시 실행되지 않는다.
+// 컴포넌트가 첫 렌더링 후, 여기에 비동기 요청을 많이 한다. 
+
+
 
 //API Call function
 
